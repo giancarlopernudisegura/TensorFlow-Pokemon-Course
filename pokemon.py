@@ -42,3 +42,13 @@ def label_delineator(df_train, df_test, label):
     return (train_data, train_labels, test_data, test_labels)
 
 train_data, train_labels, test_data, test_labels = label_delineator(df_train, df_test, 'isLegendary')
+
+
+train_data = preprocessing.MinMaxScaler().fit_transform(train_data)
+test_data = preprocessing.MinMaxScaler().fit_transform(test_data)
+
+length = train_data.shape[1]
+
+model = keras.Sequential()
+model.add(keras.layers.Dense(500, activation='relu', input_shape=[length,]))
+model.add(keras.layers.Dense(2, activation='softmax'))
