@@ -52,3 +52,10 @@ length = train_data.shape[1]
 model = keras.Sequential()
 model.add(keras.layers.Dense(500, activation='relu', input_shape=[length,]))
 model.add(keras.layers.Dense(2, activation='softmax'))
+
+model.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(train_data, train_labels, epochs=500)
+
+loss_value, accuracy_value = model.evaluate(test_data, test_labels)
+print(f'Test Accuracy: {accuracy_value}')
